@@ -1,5 +1,7 @@
+import os
 from flask import Flask
 import datetime, platform
+
 
 app = Flask(__name__)
 
@@ -13,7 +15,13 @@ def counter():
         "so_lan_truy_cap": visit_count,
         "ghi_chu": "So nay se MAT khi container khoi dong lai!"
     }
-
+@app.route("/api/info")
+def info():
+    ten_sinh_vien = os.environ.get("STUDENT_NAME", "Chua dat bien moi truong")
+    return {
+        "sinh_vien": ten_sinh_vien,
+        "nguon_du_lieu": "Environment Variable tren Render, KHONG hardcode trong code"
+    }
 @app.route("/")
 def home():
     return f"""
