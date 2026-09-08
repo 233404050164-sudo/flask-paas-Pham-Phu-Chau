@@ -3,6 +3,17 @@ import datetime, platform
 
 app = Flask(__name__)
 
+visit_count = 0  # Bien dem luu trong RAM cua container
+
+@app.route("/api/counter")
+def counter():
+    global visit_count
+    visit_count += 1
+    return {
+        "so_lan_truy_cap": visit_count,
+        "ghi_chu": "So nay se MAT khi container khoi dong lai!"
+    }
+
 @app.route("/")
 def home():
     return f"""
